@@ -15,27 +15,27 @@ import exammomo20230821.com.quangvlh.exception.ExamMomoException;
 public abstract class PayPalActionAbstract implements PayPalAction {
 	
 	protected long money;
-	protected Map<String, Action> mapActionByActionName = new HashMap<String, Action>();
+	protected Map<String, Action<?>> mapActionByActionName = new HashMap<String, Action<?>>();
 	protected Map<Integer, BillDTO> mapBillDTOById = new HashMap<Integer, BillDTO>();
 	
-	protected Action getMapActionByActionName(String actionName) throws ExamMomoException {
+	protected Action<?> getActionByActionNameFromMap(String actionName) throws ExamMomoException {
 		if (mapActionByActionName.isEmpty()) {
 			initMapAction();
 		}
 		return mapActionByActionName.get(actionName);
 	}
 	
-	protected void putMapActionByActionName(Action action) {
+	protected void putMapActionByActionName(Action<?> action) {
 		mapActionByActionName.put(action.actionName(), action);
 	}
 	
 	@Override
-	public Object handlePayPalAction(ScannerValueInputDTO scannerValueInputDTO) throws ExamMomoException {
-		Action action = getMapActionByActionName(scannerValueInputDTO.getKey());
+	public Action<?> getActionByActionName(ScannerValueInputDTO scannerValueInputDTO) throws ExamMomoException {
+		Action<?> action = getActionByActionNameFromMap(scannerValueInputDTO.getKey());
 		if (action == null) {
 			throw new ExamMomoException(ErrorCodeEnum.ERROR_ACTION_NOT_SUPPORT);
 		}
-		return action.handle(scannerValueInputDTO.getValue(), this);
+		return action;
 	}
 	
 	@Override
@@ -68,7 +68,6 @@ public abstract class PayPalActionAbstract implements PayPalAction {
 	
 	@Override
 	public BillDTO getBill(int id) {
-		// TODO Auto-generated method stub
 		return mapBillDTOById.get(id);
 	}
 	

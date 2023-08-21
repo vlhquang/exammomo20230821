@@ -18,7 +18,8 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", "10000000");
 		try {
-			Long result = (Long) payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			Long result = action.handle(dto.getValue(), payPalAction);
 			assertEquals(10000000, result);
 		} catch (ExamMomoException e) {
 			assertTrue(false);
@@ -30,7 +31,8 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", "AAAAAAAAA");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 		} catch (ExamMomoException e) {
 			assertEquals(e.getErrorCodeEnum(), ErrorCodeEnum.ERROR_VALUE_MONEY_WRONG_FORMAT_OR_VALUE_OVERFLOW_LONG);
 		}
@@ -41,7 +43,8 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", "100000AAAAA");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 		} catch (ExamMomoException e) {
 			assertEquals(e.getErrorCodeEnum(), ErrorCodeEnum.ERROR_VALUE_MONEY_WRONG_FORMAT_OR_VALUE_OVERFLOW_LONG);
 		}
@@ -52,7 +55,8 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", String.valueOf(Long.MAX_VALUE));
 		try {
-			Long result = (Long) payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			Long result = action.handle(dto.getValue(), payPalAction);
 			assertEquals(Long.MAX_VALUE, result);
 		} catch (ExamMomoException e) {
 			assertTrue(false);
@@ -64,8 +68,9 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", String.valueOf(Long.MAX_VALUE));
 		try {
-			payPalAction.handlePayPalAction(dto);
-			payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			assertEquals(e.getErrorCodeEnum(), ErrorCodeEnum.ERROR_VALUE_MONEY_WRONG_FORMAT_OR_VALUE_OVERFLOW_LONG);
@@ -77,7 +82,8 @@ public class CashInActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CASH_IN", "500000");
 		try {
-			Long result = (Long)payPalAction.handlePayPalAction(dto);
+			CashInAction action = (CashInAction) payPalAction.getActionByActionName(dto);
+			Long result = action.handle(dto.getValue(), payPalAction);
 			assertEquals(500000, result);
 		} catch (ExamMomoException e) {
 			assertTrue(false);

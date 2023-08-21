@@ -18,7 +18,8 @@ public class CreateBillActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CREATE_BILL", "");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -31,7 +32,8 @@ public class CreateBillActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CREATE_BILL", "200000/23/12/2023");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -40,7 +42,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "200000;23/12/2023");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -49,7 +52,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", ";200000;23/12/2023;");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -58,7 +62,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "type1;200000/23/12/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -71,7 +76,8 @@ public class CreateBillActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CREATE_BILL", "type1;200000fgf;23/12/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -80,7 +86,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "type1;fdfdsfdsf;23/12/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -93,7 +100,8 @@ public class CreateBillActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CREATE_BILL", "type1;20000;32/12/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -102,7 +110,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "type1;20000;31/13/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -111,7 +120,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "type1;20000;31/12/3000;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -120,7 +130,8 @@ public class CreateBillActionTest {
 		
 		dto = new ScannerValueInputDTO("CREATE_BILL", "type1;20000;29/02/2023;VNPT");
 		try {
-			payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			action.handle(dto.getValue(), payPalAction);
 			assertTrue(false);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());
@@ -133,7 +144,8 @@ public class CreateBillActionTest {
 		PayPalAction payPalAction = new PayPalActionFirstVersionImpl();
 		ScannerValueInputDTO dto = new ScannerValueInputDTO("CREATE_BILL", "type1;20000;31/12/2023;VNPT");
 		try {
-			BillDTO result = (BillDTO) payPalAction.handlePayPalAction(dto);
+			CreateBillAction action = (CreateBillAction) payPalAction.getActionByActionName(dto);
+			BillDTO result = action.handle(dto.getValue(), payPalAction);
 			assertTrue(result.getId() > 0);
 		} catch (ExamMomoException e) {
 			System.out.println(e.getMessage());

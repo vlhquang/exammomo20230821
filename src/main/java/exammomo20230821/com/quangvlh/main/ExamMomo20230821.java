@@ -22,7 +22,7 @@ public class ExamMomo20230821 {
 		if (EXIT.equals(scannerValueInputDTO.getKey())) {
 			return false;
 		} else {
-			ConfigUtil.getPayPalActionInstance().handlePayPalAction(scannerValueInputDTO);
+			ConfigUtil.getPayPalActionInstance().getActionByActionName(scannerValueInputDTO).handle(valueInput, ConfigUtil.getPayPalActionInstance());
 			return true;
 		}
 	}
