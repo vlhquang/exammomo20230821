@@ -2,6 +2,7 @@ package exammomo20230821.com.quangvlh.main;
 
 import java.util.Scanner;
 
+import exammomo20230821.com.quangvlh.action.Action;
 import exammomo20230821.com.quangvlh.common.Validator;
 import exammomo20230821.com.quangvlh.config.ConfigUtil;
 import exammomo20230821.com.quangvlh.dtos.ScannerValueInputDTO;
@@ -22,7 +23,8 @@ public class ExamMomo20230821 {
 		if (EXIT.equals(scannerValueInputDTO.getKey())) {
 			return false;
 		} else {
-			ConfigUtil.getPayPalActionInstance().getActionByActionName(scannerValueInputDTO).handle(valueInput, ConfigUtil.getPayPalActionInstance());
+			Action<?> action = ConfigUtil.getPayPalActionInstance().getActionByActionName(scannerValueInputDTO);
+			action.handle(scannerValueInputDTO.getValue(), ConfigUtil.getPayPalActionInstance());
 			return true;
 		}
 	}
