@@ -22,3 +22,12 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+target/classes/META-INF/MANIFEST.MF
+target/surefire-reports/TEST-exammomo20230821.com.quangvlh.common.ConvertionTest.xml
+target/surefire-reports/exammomo20230821.com.quangvlh.common.ConvertionTest.txt
+target/surefire-reports/2023-08-21T23-14-37_413.dumpstream
+target/surefire-reports/2023-08-21T23-12-43_225.dumpstream
+target/maven-archiver/pom.properties
+target/classes/META-INF/maven/com.quangvlh/exammomo20230821/pom.xml
+target/classes/META-INF/maven/com.quangvlh/exammomo20230821/pom.properties
+target/classes/META-INF/MANIFEST.MF
